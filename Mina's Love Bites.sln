@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinaLoveBites", "MinaLoveBites\MinaLoveBites.csproj", "{9B29D7D5-0F86-DEF9-5670-95010CFC980F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B29D7D5-0F86-DEF9-5670-95010CFC980F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B29D7D5-0F86-DEF9-5670-95010CFC980F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B29D7D5-0F86-DEF9-5670-95010CFC980F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B29D7D5-0F86-DEF9-5670-95010CFC980F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1CB6A22-CEAA-4A55-A858-D44DBABE75DC}
+	EndGlobalSection
+EndGlobal
