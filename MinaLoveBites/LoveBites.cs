@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
@@ -10,6 +11,7 @@ namespace MinaLoveBites;
 public class LoveBites : BaseUnityPlugin
 {
     public static Harmony Harmony;
+    public static string ExtensionID = "lovebites";
     internal static new ManualLogSource Logger;
     internal static string MultiTeamBattleGuid = "com.ravenfield.multiteambattle";
         
@@ -20,7 +22,18 @@ public class LoveBites : BaseUnityPlugin
         Logger.LogInfo($"Mina is ready to give you love bites! :3");
 
         Harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), "dotnet.mian.lovebites");
+        
+        RavenfieldExtensions.AVAILABLE_EXTENSIONS_LOWERCASE = RavenfieldExtensions.AVAILABLE_EXTENSIONS_LOWERCASE.AddToArray(ExtensionID);
+        
+        ProxyRegistry.CreateTypes();
+        ProxyRegistry.RegisterIfNeeded();
+    }
 
-        RavenfieldExtensions.AVAILABLE_EXTENSIONS_LOWERCASE = RavenfieldExtensions.AVAILABLE_EXTENSIONS_LOWERCASE.AddToArray("lovebites");
+    private void OnDestroy()
+    {
+        Harmony?.UnpatchSelf();
+        RavenfieldExtensions.AVAILABLE_EXTENSIONS_LOWERCASE = RavenfieldExtensions.AVAILABLE_EXTENSIONS_LOWERCASE.Where(value => !value.Equals(ExtensionID)).ToArray();
+        
+        ProxyRegistry.UnregisterIfNeeded();
     }
 }
