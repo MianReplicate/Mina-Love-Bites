@@ -31,6 +31,8 @@ public class LoveBites : BaseUnityPlugin
 
     private void OnDestroy()
     {
+        LoveBites.Logger.LogInfo("Unregistering everything...");
+
         Harmony?.UnpatchSelf();
         RavenfieldExtensions.AVAILABLE_EXTENSIONS_LOWERCASE = RavenfieldExtensions.AVAILABLE_EXTENSIONS_LOWERCASE.Where(value => !value.Equals(ExtensionID)).ToArray();
         

@@ -26,7 +26,7 @@ public class ProxyRegistry
 
         foreach (var pair in _types)
         {
-            LoveBites.Logger.LogInfo("Registered proxy for " + pair.Key);
+            LoveBites.Logger.LogInfo("Created type for " + pair.Key);
         }
     }
     
@@ -35,6 +35,7 @@ public class ProxyRegistry
         foreach (var pair in _types)
         {
             script.Globals[pair.Key] = pair.Value;
+            LoveBites.Logger.LogInfo("Exposed type for " + pair.Key);
         }
     }
 
@@ -43,6 +44,7 @@ public class ProxyRegistry
         foreach (var pair in _types)
         {
             UserData.RegisterType(pair.Value);
+            LoveBites.Logger.LogInfo("Registered type for " + pair.Key);
         }
     }
 
@@ -56,7 +58,7 @@ public class ProxyRegistry
             if (scriptEngine != null)
             {
                 var proxyListField = AccessTools.Field(typeof(ScriptEngine), "proxyTypes");
-                var script = (Script) AccessTools.Field(typeof(RavenscriptManager), "script").GetValue(scriptEngine);
+                var script = (Script) AccessTools.Field(typeof(ScriptEngine), "script").GetValue(scriptEngine);
                 var proxyList = (Type[]) proxyListField.GetValue(scriptEngine);
                 if (proxyList?.Length > 0) // has Ravenscript already been registered?
                 {
@@ -78,7 +80,7 @@ public class ProxyRegistry
             if (scriptEngine != null)
             {
                 var proxyListField = AccessTools.Field(typeof(ScriptEngine), "proxyTypes");
-                var script = (Script) AccessTools.Field(typeof(RavenscriptManager), "script").GetValue(scriptEngine);
+                var script = (Script) AccessTools.Field(typeof(ScriptEngine), "script").GetValue(scriptEngine);
                 var proxyList = (Type[]) proxyListField.GetValue(scriptEngine);
                 if (proxyList?.Length > 0) // has Ravenscript already been registered?
                 {
