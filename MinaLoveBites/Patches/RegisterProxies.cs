@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using HarmonyLib;
 using Lua.Proxy;
-using MinaLoveBites.ColorSchemeExtensions;
 using MinaLoveBites.MultiTeamBattleExtensions;
 using MoonSharp.Interpreter;
 

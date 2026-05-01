@@ -3,6 +3,8 @@ using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using HarmonyLib.Tools;
+using MinaLoveBites.ColorScheme;
 
 namespace MinaLoveBites;
 
@@ -37,5 +39,6 @@ public class LoveBites : BaseUnityPlugin
         RavenfieldExtensions.AVAILABLE_EXTENSIONS_LOWERCASE = RavenfieldExtensions.AVAILABLE_EXTENSIONS_LOWERCASE.Where(value => !value.Equals(ExtensionID)).ToArray();
         
         ProxyRegistry.UnregisterIfNeeded();
+        ColorSchemeExtensions.Destroy();
     }
 }

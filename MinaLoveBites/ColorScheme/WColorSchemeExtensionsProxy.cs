@@ -2,7 +2,7 @@
 using Lua.Proxy;
 using MoonSharp.Interpreter;
 
-namespace MinaLoveBites.ColorSchemeExtensions;
+namespace MinaLoveBites.ColorScheme;
 
 [Proxy(typeof(WColorSchemeExtensions))]
 public class WColorSchemeExtensionsProxy
