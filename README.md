@@ -13,3 +13,7 @@ Once BepInEx is installed, run the game once. Afterwards, place the LoveBites.dl
 * Ability to override individual actor colors
 * Exposed Ravenscript
   * Retrieving teams from Multi-Teams Battle
+
+### Bugs
+* Blood decals currently do not change to overridden actor colors
+  * The only way to fix this that I am aware of would compromise game performance, which I am not willing to do  
