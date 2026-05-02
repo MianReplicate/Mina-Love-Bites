@@ -19,8 +19,8 @@ public static class DecalManagerExtras
 
         Color color = ColorSchemeExtensions.Instance.GetActorColor(actor);
         float bloodParticleSize = ActorManager.instance.bloodParticleSize;
-        SpecialBloodParticle component1 = UnityEngine.Object.Instantiate<GameObject>(DecalManager.instance.bloodDropPrefab, point, Quaternion.identity).AddComponent<SpecialBloodParticle>();
-        GameObject.Destroy(component1.transform.gameObject.GetComponent<BloodParticle>());
+        BloodParticle component1 = UnityEngine.Object.Instantiate<GameObject>(DecalManager.instance.bloodDropPrefab, point, Quaternion.identity).AddComponent<BloodParticle>();
+        // GameObject.Destroy(component1.transform.gameObject.GetComponent<BloodParticle>());
         component1.transform.localScale.Scale(new Vector3(bloodParticleSize, bloodParticleSize, bloodParticleSize) * UnityEngine.Random.Range(2f, 3f));
         float num = ActorManager.instance.bloodParticleLifetime;
         if (BloodParticle.BLOOD_PARTICLE_SETTING == BloodParticle.BloodParticleType.DecalOnly)
@@ -31,7 +31,7 @@ public static class DecalManagerExtras
         else
             component1.velocity = baseVelocity + (UnityEngine.Random.insideUnitSphere + new Vector3(0.0f, 1.2f, 0.0f)) * ActorManager.instance.bloodParticleVerticalLaunchSpeed;
         component1.expires = Time.time + num;
-        component1.actor = actor;
+        component1.team = actor.team;
         Renderer component2 = component1.GetComponent<Renderer>();
         if (BloodParticle.BLOOD_PARTICLE_SETTING == BloodParticle.BloodParticleType.DecalOnly)
             component2.enabled = false;
