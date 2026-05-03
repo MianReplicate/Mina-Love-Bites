@@ -8,6 +8,18 @@ namespace MinaLoveBites.Patches;
 
 [HarmonyPatch]
 public static class ColorSchemePatches {
+    public static void ChangeToNewColor(Actor __instance)
+    {
+        var mainRT = ColorSchemeExtensions.Instance.GetOverrideRT(__instance);
+        if (mainRT == null || __instance.aiControlled)
+            return;
+
+        foreach (var renderer in LocalPlayer.controller.fpParent.shoulderParent.GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            renderer.material.mainTexture = mainRT;
+        }
+    }
+    
     [HarmonyPatch(typeof(GameManager), "StartGame")]
     [HarmonyPostfix]
     public static void OnGameManagerStart()
@@ -15,34 +27,13 @@ public static class ColorSchemePatches {
         ColorSchemeExtensions.Destroy();
     }
     
-    [HarmonyPatch(typeof(Actor), "SpawnWeapon")]
+    [HarmonyPatch(typeof(Actor), "Unholster")]
     [HarmonyPostfix]
-    public static void OnSpawnWeapon(Actor __instance)
+    public static void OnUnholster(Actor __instance)
     {
-        var mainRT = ColorSchemeExtensions.Instance.GetOverrideRT(__instance);
-        if (mainRT == null || __instance.aiControlled)
-            return;
-
-        foreach (var renderer in LocalPlayer.controller.fpParent.shoulderParent.GetComponentsInChildren<SkinnedMeshRenderer>())
-        {
-            renderer.material.mainTexture = mainRT;
-        }
+        ChangeToNewColor(__instance);
     }
     
-    [HarmonyPatch(typeof(Actor), "SwitchWeapon")]
-    [HarmonyPostfix]
-    public static void OnSwitchWeapon(Actor __instance)
-    {
-        var mainRT = ColorSchemeExtensions.Instance.GetOverrideRT(__instance);
-        if (mainRT == null || __instance.aiControlled)
-            return;
-
-        foreach (var renderer in LocalPlayer.controller.fpParent.shoulderParent.GetComponentsInChildren<SkinnedMeshRenderer>())
-        {
-            renderer.material.mainTexture = mainRT;
-        }
-    }
-
     [HarmonyPatch(typeof(Actor), nameof(Actor.Damage))]
     [HarmonyTranspiler]
     [HarmonyDebug]
